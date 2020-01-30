@@ -5,8 +5,52 @@
     <title>Rockets</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <script src="../controllers/controller.js"></script>
+    <button type="button" onclick="crearCohete(1)">
+      Crearte cohete 1
+    </button>
+
+    <button type="button" onclick="crearCohete(2)">
+      Crearte cohete 2
+    </button>
+    <br />
+
+    <button type="button" onclick="acelerarCohete(1)">
+      Accelerate cohete 1
+    </button>
+
+    <button type="button" onclick="acelerarCohete(2)">
+      Accelerate cohete 2
+    </button>
+
+    <button type="button" onclick="breakRocket(1)">
+      Break rocket 1
+    </button>
+
+    <button type="button" onclick="breakRocket(2)">
+      Break rocket 2
+    </button>
+    <br/>
+
+    <button type="button" onclick="printInfo(1)">
+      Print rocket 1 info
+    </button>
+
+    <button type="button" onclick="printInfo(2)">
+      Print rocket 2 info
+    </button>
+
+    <button type="button" onclick="printAll()">
+      Print all rockets
+    </button>
+    
+    <div id="info"></div>
+    </br>
+    <div id="velocidad"></div>
+
     <script src="../models/cohetes.js"></script>
+    <script src="../models/propulsores.js"></script>
+    <script src="../controllers/controller.js"></script>
   </body>
 </html>

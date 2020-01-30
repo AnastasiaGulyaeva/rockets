@@ -1,18 +1,22 @@
 class Cohete {
   codigo: string;
-  propulsores: number;
+  propulsores: Propulsor[] = new Array();
 
-  constructor(codigo: string, propulsores: number) {
+  constructor(codigo: string) {
     this.codigo = codigo;
-    this.propulsores = propulsores;
   }
-}
 
-var cohete1 = new Cohete("32WESSDS", 3);
-var cohete2 = new Cohete("LDSFJA32", 6);
-console.log(
-  "Cohete " + cohete1.codigo + " tiene " + cohete1.propulsores + " propulsores"
-);
-console.log(
-  "Cohete " + cohete2.codigo + " tiene " + cohete2.propulsores + " propulsores"
-);
+  addPropulsor(propulsor: Propulsor): void {
+    this.propulsores.push(propulsor);
+  }
+
+  // get potenciaActual() {
+  //   for (let i = 0; i < this.propulsores.length; i++) {
+  //     this._potenciaActual += this.propulsores[i];
+  //   }
+  // }
+
+  // set potenciaActual(value) {
+  //   this._potenciaActual = value;
+  // }
+}
