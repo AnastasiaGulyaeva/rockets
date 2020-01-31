@@ -1,14 +1,13 @@
 "use strict";
 var rocket1;
 var rocket2;
-// datos
 var codigo1 = "32WESSDS";
 var codigo2 = "LDSFJA32";
 var potenciaMax1 = [10, 30, 80];
 var potenciaMax2 = [30, 40, 50, 50, 30, 10];
 var potenciaActial;
 var x;
-// let velocidad2: number;
+var info2 = document.getElementById("info2");
 // Los botones para crear cohetes
 function crearCohete(x) {
     if (x == 1) {
@@ -46,8 +45,32 @@ function acelerarCohete(x) {
         }
     }
 }
+// arrancar los botones del freno
+function breakRocket(x) {
+    if (x == 1) {
+        if (rocket1 == undefined) {
+            alert("Primero tienes que crear un cohete!");
+        }
+        else {
+            frenar(rocket1);
+            calcularVelocidad(rocket1);
+            console.log(rocket1);
+            console.log(Cohete);
+        }
+    }
+    else if (x == 2) {
+        if (rocket2 == undefined) {
+            alert("Primero tienes que crear un cohete!");
+        }
+        else {
+            frenar(rocket2);
+            calcularVelocidad(rocket2);
+        }
+    }
+}
 // arrancar los botones de la imprecion
 function printInfo(x) {
+    ocultarInfo2();
     if (x == 1) {
         if (rocket1 == undefined) {
             alert("Primero tienes que crear un cohete!");
@@ -65,19 +88,49 @@ function printInfo(x) {
         }
     }
 }
+// Arrancar boton para imprimir todos los cohetes
+function printAll() {
+    mostrarInfo2();
+    if (rocket1 == undefined && rocket2 == undefined) {
+        alert("Primero tienes que crear los cohetes!");
+    }
+    else if (rocket1 == undefined) {
+        print2(rocket2);
+    }
+    else if (rocket2 == undefined) {
+        print(rocket1);
+    }
+    else {
+        print(rocket1);
+        print2(rocket2);
+    }
+}
 // function para crear propulsores
 function crearPropulsores(rocket, potenciaMax) {
     for (var i = 0; i < potenciaMax.length; i++) {
         rocket.addPropulsor(new Propulsor(potenciaMax[i]));
     }
 }
-// punction para imprimir los datos
+// functiones para imprimir los datos
 function print(rocket) {
     var printPotenciaMax = [];
     for (var i = 0; i < rocket.propulsores.length; i++) {
         printPotenciaMax.push(rocket.propulsores[i].potenciaMax);
     }
     document.getElementById("info").innerText =
+        "Cohete " +
+            rocket.codigo +
+            " tiene " +
+            rocket.propulsores.length +
+            " propulsores: " +
+            printPotenciaMax;
+}
+function print2(rocket) {
+    var printPotenciaMax = [];
+    for (var i = 0; i < rocket.propulsores.length; i++) {
+        printPotenciaMax.push(rocket.propulsores[i].potenciaMax);
+    }
+    document.getElementById("info2").innerText =
         "Cohete " +
             rocket.codigo +
             " tiene " +
@@ -93,6 +146,14 @@ function acelerar(rocket) {
         }
     }
 }
+// funcion de freno
+function frenar(rocket) {
+    for (var i = 0; i < rocket.propulsores.length; i++) {
+        if (rocket.propulsores[i].potenciaActual > 0) {
+            rocket.propulsores[i].potenciaActual -= 10;
+        }
+    }
+}
 // funcion para calcular velocidad actual
 function calcularVelocidad(rocket) {
     var potencia_total = 0;
@@ -100,4 +161,13 @@ function calcularVelocidad(rocket) {
         potencia_total += rocket.propulsores[i].potenciaActual;
     }
     console.log(potencia_total);
+    document.getElementById("velocidad").innerText =
+        "Velocidad actual del cohete: " + potencia_total;
+}
+// funciones para mostrar/ocultar un div
+function ocultarInfo2() {
+    info2.style.display = "none";
+}
+function mostrarInfo2() {
+    info2.style.display = "";
 }
